@@ -1,75 +1,5 @@
-do -- Arceus X Adapeter
-
-	local uis = cloneref(game:GetService("UserInputService"))
-	if (uis:GetPlatform() == Enum.Platform.IOS or not arceus) then
-		local arceus, ax = arceus or {}, {}
-		local function buddy() end
-
-		-- security
-		local writefile = clonefunction(writefile)
-		protectfunction(writefile)
-
-		local wf = function(path: string, ...)
-			local folder, lower = "autoexec", path:lower()
-			if lower:match("^" ..folder)
-				or lower:match("^/" ..folder)
-				or lower:match("^\\" ..folder)
-
-			then -- returns in case error is somehow hooked
-				return error("attempt to write in the auto-execution folder")
-			end
-
-			writefile(path, ...)
-		end
-
-		protectfunction(wf)
-		getgenv().writefile = wf
-
-		-- Arceus table
-		ax.is_ios = arceus.is_ios or function() return true end
-		ax.is_vng = arceus.is_vng or function() return false end
-		ax.getversion = arceus.getversion or function()
-			return select(2, identifyexecutor()) or "1.0.0"
-		end
-
-		ax.deletearceusfolder = arceus.deletearceusfolder or delfolder or buddy
-		ax.makearceusfolder = arceus.makearceusfolder or makefolder or buddy
-		ax.isarceusfolder = arceus.isarceusfolder or isfolder or buddy
-
-		ax.deletearceusfile = arceus.deletearceusfile or delfile or buddy
-		ax.listarceusfiles = arceus.listarceusfiles or listfiles or buddy
-		ax.readarceusfile = arceus.readarceusfile or readfile or buddy
-		ax.isarceusfile = arceus.isarceusfile or isfile or buddy
-
-		ax.getfilesize = arceus.getfilesize or function() return "N/A" end
-		ax.writearceusfile = arceus.writearceusfile or writefile
-
-		ax.doarceusfile = arceus.doarceusfile or dofile or function(...)
-			if ax.isarceusfile(...) then
-				local content = ax.readarceusfile(...)
-				if executecode then
-					return executecode(content)
-				end
-
-				task.spawn(loadstring, content)
-			end
-		end
-
-		-- bad
-		ax.ispermissiongranted = arceus.ispermissiongranted or buddy
-		ax.retrievecustomasset = arceus.retrievecustomasset or buddy
-		ax.deletecustomasset = arceus.deletecustomasset or buddy
-		ax.writecustomasset = arceus.writecustomasset or buddy
-		ax.WOWPALAKSZMNXBRU = arceus.WOWPALAKSZMNXBRU or buddy
-		ax.SDKEUIEWOWOASKS = arceus.SDKEUIEWOWOASKS or buddy
-		ax.UJSWOOALSKDSJEO = arceus.UJSWOOALSKDSJEO or buddy
-		ax.iscustomasset = arceus.iscustomasset or buddy
-		ax.openurl = arceus.openurl or buddy
-
-		protectfunction(ax)
-		getgenv().arceus = ax
-	end
-end
+loadstring(game:HttpGet("https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/refs/heads/main/init.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/refs/heads/main/adapter.lua"))()
 
 --[[local gethwid = isiosdevice() and function() 
 	return RBX_ANALITYCS_SERVICE:GetClientId()
@@ -79,6 +9,23 @@ local gethwid = gethwid or get_hwid or function()
 	return RBX_ANALITYCS_SERVICE:GetClientId()
 end
 protectfunction(gethwid)
+
+local protectasset do
+	local pas do
+		if arceus.EOWOWQPQPPALSKSNX then
+			pas = clonefunction(arceus.EOWOWQPQPPALSKSNX)
+			protectfunction(pas)
+		end
+	end
+	
+	protectasset = function(id: string)
+		if pas then
+			pas({id})
+		end
+
+		return id
+	end
+end
 
 pcall(function()
 	local http = cloneref(game:GetService("HttpService"))
@@ -162,7 +109,7 @@ pcall(function()
 			--	return storage.saveAssetFromUrl(storage.data.types.Gui, imageName, customUrl, true)
 			--end
 
-			return robloxUrl
+			return protectasset(robloxUrl)
 		end
 
 		-- Properties:
@@ -3767,10 +3714,10 @@ authentication = {
 
 		plans = {
 			{ Tag = "Free",		Color = Color3.fromRGB(255, 255, 255),	ImageUrl = {nil, nil}, Images = {nil, nil}},
-			{ Tag = "Basic",	Color = Color3.fromRGB(170, 169, 173),	ImageUrl = {"https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/basic_plan_glow.png",		"https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/mini_logo_basic_glow.png"		}, Images = {"rbxassetid://15996915401", "rbxassetid://15996884553"}},
-			{ Tag = "Plus",		Color = Color3.fromRGB(229, 184, 11),	ImageUrl = {"https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/plus_plan_glow.png",		"https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/mini_logo_gold_glow.png"		}, Images = {"rbxassetid://15996917306", "rbxassetid://15996887221"}},
-			{ Tag = "Premium",	Color = Color3.fromRGB(89, 219, 248),	ImageUrl = {"https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/premium_plan_glow.png",	"https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/mini_logo_premium_glow.png"	}, Images = {"rbxassetid://15996919249", "rbxassetid://15996889952"}},
-			{ Tag = "Ultimate",	Color = Color3.fromRGB(255, 0, 0),		ImageUrl = {"https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/ultimate_plan_glow.png",	"https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/mini_logo_ultimate_glow.png"	}, Images = {"rbxassetid://15287242259", "rbxassetid://15996891586"}}
+			{ Tag = "Basic",	Color = Color3.fromRGB(170, 169, 173),	ImageUrl = {"https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/basic_plan_glow.png",		"https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/mini_logo_basic_glow.png"		}, Images = {protectasset("rbxassetid://15996915401"), protectasset("rbxassetid://15996884553")}},
+			{ Tag = "Plus",		Color = Color3.fromRGB(229, 184, 11),	ImageUrl = {"https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/plus_plan_glow.png",		"https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/mini_logo_gold_glow.png"		}, Images = {protectasset("rbxassetid://15996917306"), protectasset("rbxassetid://15996887221")}},
+			{ Tag = "Premium",	Color = Color3.fromRGB(89, 219, 248),	ImageUrl = {"https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/premium_plan_glow.png",	"https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/mini_logo_premium_glow.png"	}, Images = {protectasset("rbxassetid://15996919249"), protectasset("rbxassetid://15996889952")}},
+			{ Tag = "Ultimate",	Color = Color3.fromRGB(255, 0, 0),		ImageUrl = {"https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/ultimate_plan_glow.png",	"https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/mini_logo_ultimate_glow.png"	}, Images = {protectasset("rbxassetid://15287242259"), protectasset("rbxassetid://15996891586")}}
 		},
 
 		update_callback = Instance.new("BindableEvent"), -- closes the UI when fired (if its not up to date)
@@ -4070,7 +4017,7 @@ cloudscripts = {
 		conversion_callback = Instance.new("BindableEvent"),
 
 		modes = {
-			none = "none",
+			none = "",
 			free = "free",
 			paid = "paid"
 		},
@@ -4088,8 +4035,8 @@ cloudscripts = {
 		converted_images = {},
 		conversion_cache = {},
 		conversion_processing = {},
-		not_found_image = "rbxassetid://15568147701", --storage.saveAssetFromUrl(storage.data.types.Temporary, "NotFound.png", "https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/icons8-404-error-100.png", true) or "rbxassetid://14926140651",
-		loading_image = "rbxassetid://15307361778", --storage.saveAssetFromUrl(storage.data.types.Temporary, "Loading.png", "https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/icons8-image-100.png", true),
+		not_found_image = protectasset("rbxassetid://15568147701"), --storage.saveAssetFromUrl(storage.data.types.Temporary, "NotFound.png", "https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/icons8-404-error-100.png", true) or "rbxassetid://14926140651",
+		loading_image = protectasset("rbxassetid://15307361778"), --storage.saveAssetFromUrl(storage.data.types.Temporary, "Loading.png", "https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/icons8-image-100.png", true),
 
 		api_domain = function(endpoint: string)
 			return string.format("https://www.scriptblox.com%s", endpoint)
@@ -4259,7 +4206,7 @@ cloudscripts = {
 					end)
 
 					if success and result.IconImageAssetId then
-						data = "rbxassetid://" .. result.IconImageAssetId
+						data = protectasset("rbxassetid://" .. result.IconImageAssetId)
 					end
 				else
 					return cloudscripts.data.not_found_image
@@ -6395,7 +6342,7 @@ popups = {
 					local content, isReady = PLAYERS:GetUserThumbnailAsync(player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)
 
 					Main.ProfilePopup_Game.Text = (place and place.Name) or "Unknown"
-					Main.ProfilePopup_PlayerPFP.Image = (isReady and content) or "rbxassetid://14926140651"
+					Main.ProfilePopup_PlayerPFP.Image = (isReady and content) or protectasset("rbxassetid://14926140651")
 				end)
 
 				Main.ProfilePopup_Nickname.Text = "@" .. player.Name
@@ -6481,11 +6428,11 @@ popups = {
 				local frame = Main.CloudScriptInfoPopupWindow
 
 				if not cloudscripts.setConvertedImage(Main.CloudPopup_GameImage, scriptDetails.game.image) then
-					Main.CloudPopup_GameImage.Image = scriptDetails.game.image or "rbxassetid://14926140651"
+					Main.CloudPopup_GameImage.Image = scriptDetails.game.image or protectasset("rbxassetid://14926140651")
 				end
 
 				if not cloudscripts.setConvertedImage(Main.CloudPopup_OwnerImage, scriptDetails.game.image) then
-					Main.CloudPopup_OwnerImage.Image = scriptDetails.owner.image or "rbxassetid://14926140651"
+					Main.CloudPopup_OwnerImage.Image = scriptDetails.owner.image or protectasset("rbxassetid://14926140651")
 				end
 
 				local isVerified = scriptDetails.verified and true or false
@@ -6498,8 +6445,8 @@ popups = {
 				Main.CloudPopup_Views.Text = (scriptDetails.views and misc.math.currency(scriptDetails.views)) or "Unknown"
 				Main.CloudPopup_Likes.Text = (scriptDetails.likeCount and misc.math.currency(scriptDetails.likeCount)) or "?"
 				Main.CloudPopup_Dislikes.Text = (scriptDetails.dislikeCount and misc.math.currency(scriptDetails.dislikeCount)) or "?"
-				Main.CloudPopup_LastUpdate.Text = (scriptDetails.updatedAt and misc.datetime.secondsToDate(misc.datetime.isoToUnix(scriptDetails.updatedAt)))
-				Main.CloudPopup_ReleaseDate.Text = (scriptDetails.createdAt and misc.datetime.secondsToDate(misc.datetime.isoToUnix(scriptDetails.createdAt)))
+				Main.CloudPopup_LastUpdate.Text = (scriptDetails.updatedAt and misc.datetime.secondsToDate(misc.datetime.isoToUnix(scriptDetails.updatedAt))) or "N/A"
+				Main.CloudPopup_ReleaseDate.Text = (scriptDetails.createdAt and misc.datetime.secondsToDate(misc.datetime.isoToUnix(scriptDetails.createdAt))) or "N/A"
 
 				for _, tag in ipairs(Main.CloudPopup_Tags:GetChildren()) do
 					if tag:IsA("Frame") and tag.Visible then
@@ -6515,7 +6462,7 @@ popups = {
 
 					local text = newTag:FindFirstChildWhichIsA("TextLabel")
 					if text then
-						text.Text = tag.name
+						text.Text = tag
 					end
 
 					newTag.Parent = Main.CloudPopup_Tags
@@ -6651,6 +6598,9 @@ popups = {
 				popups.data.popups[popupType](bindable, name, ...)
 				Main.MainWindow.Visible = false
 				Main.PopupModal.Visible = true
+			end,
+			Hide = function()
+				bindable:Fire(false)
 			end
 		}
 
@@ -34306,15 +34256,21 @@ task.spawn(function()
 		if not updated and getversion then
 			-- Print that is not up to date and Yield
 			local popup = popups.create(popups.data.types.UpdateDetectedWithRoblox, "robloxversion")
-			popup.OnResponse.Event:Connect(function(response)
-				exited = true
-				closeGui()
-			end)
-
+			local pass = false
+			
 			popup.Show(new or "Unknown")
+			task.spawn(function()
+				task.wait(10)
+				if pass then return end
+				popup.Hide()
+			end)
+			
+			popup.OnResponse.Event:Wait()
+			pass = true
+			
 			-- authentication.data.update_callback.Event:Wait() -- Never used lol.
 			-- closeGui()
-			return
+			-- return
 		end
 
 		if authentication.isKeyless() then
@@ -34983,7 +34939,7 @@ do -- Values divisor
 
 	task.spawn(function()
 		local content, isReady = PLAYERS:GetUserThumbnailAsync(player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)
-		local image = (isReady and content) or "rbxassetid://14926140651"
+		local image = (isReady and content) or protectasset("rbxassetid://14926140651")
 
 		Main.ProfileIMG.Image = image
 		Main.ProfileNetwork_PFPIMG.Image = image
@@ -35046,7 +35002,7 @@ do -- Values divisor
 	local icon = buttons.holdable(Main.FloatingIcon, false)
 	local defaultSize = Main.MainWindow.Size
 	local maximiseImage = Main.ControlBox_FullScreen.Image
-	local minimizeImage = "rbxassetid://15568144429" --storage.saveAssetFromUrl(storage.data.types.Temporary, "MinimizeGui.png", "https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/icons8-minimize-keep-down-reduce-button-decrease-screen-size-shrink-100.png", true)
+	local minimizeImage = protectasset("rbxassetid://15568144429") --storage.saveAssetFromUrl(storage.data.types.Temporary, "MinimizeGui.png", "https://raw.githubusercontent.com/SPDM-Team/Arceus-X-NEO-public/main/Images/icons8-minimize-keep-down-reduce-button-decrease-screen-size-shrink-100.png", true)
 	local default = Main.MainWindow.Size
 	local transictionTime = 0.5
 	local maximized = false
@@ -35517,7 +35473,7 @@ do
 			name.Text = scrName
 
 			local icon = newScr:FindFirstChildWhichIsA("ImageLabel")
-			icon.Image = isFolder and "rbxassetid://15998852370" or "rbxassetid://15088057028"
+			icon.Image = isFolder and protectasset("rbxassetid://15998852370") or protectasset("rbxassetid://15088057028")
 
 			local newBtn = buttons.holdable(newScr, false)
 			newBtn.ShortClick.Event:Connect(function()	
@@ -36761,153 +36717,153 @@ do -- Sliders
 			--end
 
 			local expand = Main.ScriptsHandler_ScriptExpander:Clone()
-        expand.MouseButton1Click:Connect(function()
-            for _, obj in ipairs(scriptscontroller.getChildren(gui)) do
-                obj = obj.Object
+			expand.MouseButton1Click:Connect(function()
+				for _, obj in ipairs(scriptscontroller.getChildren(gui)) do
+					obj = obj.Object
 
-                if listed[obj] then
-                    listed[obj].Visible = not listed[obj].Visible
-                end
-            end
-        end)
+					if listed[obj] then
+						listed[obj].Visible = not listed[obj].Visible
+					end
+				end
+			end)
 
-        expand.Parent = newScr
-    end
-end
+			expand.Parent = newScr
+		end
+	end
 
-scriptscontroller.onScriptAdded.Event:Connect(refreshList)
-Main.ScriptHandler_Delete.MouseButton1Click:Connect(function()
-    closeAllPopup.Show("Removing components", "Are you sure to remove this components from the game?")
-end)
+	scriptscontroller.onScriptAdded.Event:Connect(refreshList)
+	Main.ScriptHandler_Delete.MouseButton1Click:Connect(function()
+		closeAllPopup.Show("Removing components", "Are you sure to remove this components from the game?")
+	end)
 
-Main.ScriptHandler_SelectAll.MouseButton1Click:Connect(function()
-    if listed and guis then
-        targets = {}
+	Main.ScriptHandler_SelectAll.MouseButton1Click:Connect(function()
+		if listed and guis then
+			targets = {}
 
-        local enable = Main.ScriptHandler_SelectAll.Text == "Select all"
-        local newText = enable and "✔" or ""
+			local enable = Main.ScriptHandler_SelectAll.Text == "Select all"
+			local newText = enable and "✔" or ""
 
-        Main.ScriptHandler_SelectAll.Text = enable and "Cancel" or "Select all"
-        for _, child in pairs(listed) do
-            child:FindFirstChildWhichIsA("Frame"):FindFirstChildWhichIsA("TextButton").Active = not enable
-            child:FindFirstChildWhichIsA("Frame"):FindFirstChildWhichIsA("TextButton").Text = newText
-            child.Visible = enable
-        end
+			Main.ScriptHandler_SelectAll.Text = enable and "Cancel" or "Select all"
+			for _, child in pairs(listed) do
+				child:FindFirstChildWhichIsA("Frame"):FindFirstChildWhichIsA("TextButton").Active = not enable
+				child:FindFirstChildWhichIsA("Frame"):FindFirstChildWhichIsA("TextButton").Text = newText
+				child.Visible = enable
+			end
 
-        for obj, gui in pairs(guis) do
-            gui:FindFirstChildWhichIsA("Frame"):FindFirstChildWhichIsA("TextButton").Active = not enable
-            gui:FindFirstChildWhichIsA("Frame"):FindFirstChildWhichIsA("TextButton").Text = newText
+			for obj, gui in pairs(guis) do
+				gui:FindFirstChildWhichIsA("Frame"):FindFirstChildWhichIsA("TextButton").Active = not enable
+				gui:FindFirstChildWhichIsA("Frame"):FindFirstChildWhichIsA("TextButton").Text = newText
 
-            if enable then
-                targets[obj] = true
-            end
-        end
+				if enable then
+					targets[obj] = true
+				end
+			end
 
-        setProperiesStatus(enable)
-    end
-end)
+			setProperiesStatus(enable)
+		end
+	end)
 
-Main.ScriptHandler_Edit.MouseButton1Click:Connect(function()
-    for _, obj in ipairs(Main.ScriptsHandler_List:GetChildren()) do
-        if obj:IsA("Frame") then
-            local btn = obj:FindFirstChildWhichIsA("TextButton")
-            local txt = obj:FindFirstChildWhichIsA("TextBox")
+	Main.ScriptHandler_Edit.MouseButton1Click:Connect(function()
+		for _, obj in ipairs(Main.ScriptsHandler_List:GetChildren()) do
+			if obj:IsA("Frame") then
+				local btn = obj:FindFirstChildWhichIsA("TextButton")
+				local txt = obj:FindFirstChildWhichIsA("TextBox")
 
-            if btn and txt then
-                local staus = btn.Visible
-                editing = staus
+				if btn and txt then
+					local staus = btn.Visible
+					editing = staus
 
-                txt.Visible = staus
-                btn.Visible = not staus
+					txt.Visible = staus
+					btn.Visible = not staus
 
-                btn.Text = txt.Text
-                scriptscontroller.setObjectName(reverse[obj], btn.Text)
-            end
-        end
-    end
-end)
+					btn.Text = txt.Text
+					scriptscontroller.setObjectName(reverse[obj], btn.Text)
+				end
+			end
+		end
+	end)
 
-Main.ScriptHandler_Shake.MouseButton1Click:Connect(function()
-    scriptscontroller.applyOnTargets(keysList(targets), function(target)
-        local obj = target.Object
+	Main.ScriptHandler_Shake.MouseButton1Click:Connect(function()
+		scriptscontroller.applyOnTargets(keysList(targets), function(target)
+			local obj = target.Object
 
-        TWEEN_SERVICE:Create(obj, TweenInfo.new(
-            0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, 2, true, 0
-            ), { Position = obj.Position + UDim2.fromScale(0.005, 0) }):Play()
-    end)
-end)
+			TWEEN_SERVICE:Create(obj, TweenInfo.new(
+				0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, 2, true, 0
+				), { Position = obj.Position + UDim2.fromScale(0.005, 0) }):Play()
+		end)
+	end)
 
-Main.ScriptHandler_Reset.MouseButton1Click:Connect(function()
-    local state = configs.getSetting("ScriptsHandlerEnabled") and true or false
-    state = not state
+	Main.ScriptHandler_Reset.MouseButton1Click:Connect(function()
+		local state = configs.getSetting("ScriptsHandlerEnabled") and true or false
+		state = not state
 
-    configs.setSetting("ScriptsHandlerEnabled", state)
+		configs.setSetting("ScriptsHandlerEnabled", state)
 
-    for _, child in ipairs(Main.ScriptsHandler_List:GetChildren()) do
-        if child:IsA("GuiObject") and child ~= Main.ScriptHandler_Object and child ~= Main.ScriptHandler_Script then
-            local text = child:FindFirstChildWhichIsA("TextButton")
-            local frame = child:FindFirstChildWhichIsA("Frame")
+		for _, child in ipairs(Main.ScriptsHandler_List:GetChildren()) do
+			if child:IsA("GuiObject") and child ~= Main.ScriptHandler_Object and child ~= Main.ScriptHandler_Script then
+				local text = child:FindFirstChildWhichIsA("TextButton")
+				local frame = child:FindFirstChildWhichIsA("Frame")
 
-            if text and frame then
-                text.Active = state
-                frame:FindFirstChildWhichIsA("TextButton").Active = state
-                child.Visible = state
-            end
-        end
-    end
+				if text and frame then
+					text.Active = state
+					frame:FindFirstChildWhichIsA("TextButton").Active = state
+					child.Visible = state
+				end
+			end
+		end
 
-    if not state then
-        setProperiesStatus(false)
-    end
-end)
+		if not state then
+			setProperiesStatus(false)
+		end
+	end)
 
-Main.ScriptHandler_Center.MouseButton1Click:Connect(function()
-    scriptscontroller.applyOnTargets(keysList(targets), function(target)
-        local obj = target.Object
+	Main.ScriptHandler_Center.MouseButton1Click:Connect(function()
+		scriptscontroller.applyOnTargets(keysList(targets), function(target)
+			local obj = target.Object
 
-        scriptscontroller.centerPosition(obj)
-    end)
-end)
+			scriptscontroller.centerPosition(obj)
+		end)
+	end)
 
-buttons.switch(Main.ScriptHandler_Visibility).Toggle.Event:Connect(function(_, status)
-    toggleTargetsVisibility(status)
-end)
+	buttons.switch(Main.ScriptHandler_Visibility).Toggle.Event:Connect(function(_, status)
+		toggleTargetsVisibility(status)
+	end)
 
 --[[
         [ INDEX HOOK ]
 ]]
 
-if configs.getSetting("AntiDetectors") and hookmetamethod and newcclosure and checkcaller then
-    local indexOld
-    indexOld = hookmetamethod(game, "__index", newcclosure(function(...)
-        local args = {...}
+	if configs.getSetting("AntiDetectors") and hookmetamethod and newcclosure and checkcaller then
+		local indexOld
+		indexOld = hookmetamethod(game, "__index", newcclosure(function(...)
+			local args = {...}
 
-        if not checkcaller() then
-            if configs.getSetting("AntiSpeedDetection") and args[2]:lower() == "walkspeed" then
-                return defaultSpeed
-            elseif configs.getSetting("AntiJumpDetection") and (args[2]:lower() == "jumpheight" or args[2]:lower() == "jumppower") then
-                return defaultJump
-            elseif configs.getSetting("AntiGravityDetection") and args[2]:lower() == "gravity" then
-                return defaultGravity
-            end
-        end
+			if not checkcaller() then
+				if configs.getSetting("AntiSpeedDetection") and args[2]:lower() == "walkspeed" then
+					return defaultSpeed
+				elseif configs.getSetting("AntiJumpDetection") and (args[2]:lower() == "jumpheight" or args[2]:lower() == "jumppower") then
+					return defaultJump
+				elseif configs.getSetting("AntiGravityDetection") and args[2]:lower() == "gravity" then
+					return defaultGravity
+				end
+			end
 
-        return indexOld(...)
-    end))
+			return indexOld(...)
+		end))
 
-    local namecallOld
-    namecallOld = hookmetamethod(game, "__namecall", newcclosure(function(...)
-        local args = {...}
+		local namecallOld
+		namecallOld = hookmetamethod(game, "__namecall", newcclosure(function(...)
+			local args = {...}
 
-        if not checkcaller() then
-            if configs.getSetting("AntiKick") and args[2]:lower() == "kick" then
-                return nil
-            end
-        end
+			if not checkcaller() then
+				if configs.getSetting("AntiKick") and args[2]:lower() == "kick" then
+					return nil
+				end
+			end
 
-        return namecallOld(...)
-    end))
-end
+			return namecallOld(...)
+		end))
+	end
 end
 
 --[[
@@ -36915,9 +36871,9 @@ end
 ]]
 
 if isStudio then
-arceus_loaded = true
-Main.KeySystem.Visible = false
---Main.FloatingIcon.Visible = true
+	arceus_loaded = true
+	Main.KeySystem.Visible = false
+	--Main.FloatingIcon.Visible = true
 end
 
 --[[
